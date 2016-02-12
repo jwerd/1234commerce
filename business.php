@@ -2,9 +2,12 @@
 
 class Person {
     protected $name;
-    public function __construct($name)
+    protected $position;
+
+    public function __construct($name, $position = 'Owner')
     {
-        $this->name = $name;
+        $this->name     = $name;
+        $this->position = $position;
     }
 }
 
@@ -48,12 +51,12 @@ class Staff {
 }
 
 // An example how to call this and build the objects out:
-$owner = new Person('Sean');
-$secondowner = new Person('Jackie');
+$owner = new Person('Sean', 'Owner');
+$secondowner = new Person('Jackie','Leecher');
 $staff = new Staff([$owner,$secondowner]);
 $scs = new Business("SCS", $staff);
-$scs->hire(new Person('Jake'));
-$scs->hire(new Person('Colby'));
+$scs->hire(new Person('Jake', 'Slave'));
+$scs->hire(new Person('Colby', 'Thief'));
 
 echo "Company report for ".$scs->getCompanyName()."\n";
 var_dump($scs);
