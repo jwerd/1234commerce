@@ -9,6 +9,15 @@ class Person {
         $this->name     = $name;
         $this->position = $position;
     }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+    public function getPosition()
+    {
+        return $this->position;
+    }
 }
 
 class Business {
@@ -55,11 +64,14 @@ $owner = new Person('Sean', 'Owner');
 $secondowner = new Person('Jackie','Leecher');
 $staff = new Staff([$owner,$secondowner]);
 $scs = new Business("SCS", $staff);
-$scs->hire(new Person('Jake', 'Slave'));
-$scs->hire(new Person('Colby', 'Thief'));
+$scs->hire(new Person('Jake', 'Tech'));
+$scs->hire(new Person('Colby', 'Tech'));
 
 echo "Company report for ".$scs->getCompanyName()."\n";
-var_dump($scs);
+echo "=====\n";
+foreach($scs->getStaffMembers() as $member) {
+    echo $member->getName() . ", with position: " . $member->getPosition() . "\n";
+}
+//var_dump($scs);
 echo "Yeee, we're at the end...\n";
-
 ?>
