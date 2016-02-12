@@ -47,6 +47,7 @@ class Staff {
     }
 }
 
+// An example how to call this and build the objects out:
 $owner = new Person('Sean');
 $secondowner = new Person('Jackie');
 $staff = new Staff([$owner,$secondowner]);
