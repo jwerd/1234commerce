@@ -108,7 +108,7 @@ void main()
     // side business
     Business ibkomputahs;
     ibkomputahs.staff = &staff[9];  // steals from main business
-    set_owner(&ibkomputahs, "Lisa", "CFO (Chief Foodmow Omnoms");
+    set_owner(&ibkomputahs, "Lisa", "CFO (Chief Foodmow Omnoms)");
 
     // employees
     hire(&scs, "Jake", "Tech");
