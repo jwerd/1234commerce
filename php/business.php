@@ -16,11 +16,7 @@ class Person {
     }
     public function getPosition()
     {
-        $pos = $this->position;
-        if(is_array($this->position)) {
-            $pos = implode(", ", $this->position);
-        }
-        return $pos;
+        return is_array($this->position) ? implode(", ", $this->position) : $this->position;
     }
 }
 
