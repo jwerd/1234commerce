@@ -71,7 +71,6 @@ class Staff {
 // An example how to call this and build the objects out:
 $owner = new Person('Sean', 'Owner');
 $secondowner = new Person('Jackie', ['Owner', 'Leecher']);
-$staff = new Staff([$owner,$secondowner]);
 $scs = (new Business('SCS'))
         ->hire($owner)
         ->hire($secondowner)
