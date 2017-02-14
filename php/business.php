@@ -2,7 +2,7 @@
 
 class Person {
     protected $name;
-    protected $position;
+    protected $position = [];
 
     public function __construct($name, $position = 'Owner')
     {
@@ -16,7 +16,11 @@ class Person {
     }
     public function getPosition()
     {
-        return $this->position;
+        $pos = $this->position;
+        if(is_array($this->position)) {
+            $pos = implode(", ", $this->position);
+        }
+        return $pos;
     }
 }
 
@@ -24,14 +28,22 @@ class Business {
     protected $name;
     protected $staff;
 
-    public function __construct($name, Staff $staff)
+    public function __construct($name)
     {
         $this->name  = $name;
-        $this->staff = $staff;
+        $this->staff = new Staff;
+
+        return $this;
     }
     public function hire(Person $person)
     {
         $this->staff->add($person);
+
+        return $this;
+    }
+    public function fire(Person $person)
+    {
+        //@todo implement
     }
     public function getCompanyName()
     {
@@ -45,10 +57,7 @@ class Business {
 
 class Staff {
     protected $members = [];
-    public function __construct($members = [])
-    {
-        $this->members = $members;
-    }
+
     public function add(Person $person)
     {
         $this->members[] = $person;
@@ -61,11 +70,13 @@ class Staff {
 
 // An example how to call this and build the objects out:
 $owner = new Person('Sean', 'Owner');
-$secondowner = new Person('Jackie','Leecher');
+$secondowner = new Person('Jackie', ['Owner', 'Leecher']);
 $staff = new Staff([$owner,$secondowner]);
-$scs = new Business("SCS", $staff);
-$scs->hire(new Person('Jake', 'Tech'));
-$scs->hire(new Person('Colby', 'Tech'));
+$scs = (new Business('SCS'))
+        ->hire($owner)
+        ->hire($secondowner)
+        ->hire(new Person('Jake', 'Tech'))
+        ->hire(new Person('Colby', 'Tech'));
 
 echo "Company report for ".$scs->getCompanyName()."\n";
 echo "=====\n";
